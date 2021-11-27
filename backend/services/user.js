@@ -53,12 +53,22 @@ const findUserById = async (id) => {
 }
 
 
+/**update user */
 const UpdateUserInfo = async (data ,id) => {
-  var updateduser = Object.keys(data).map(function (key) { 
-    return "" + key + " = '" + data[key]+"'"; 
-  }).join(" , ");
+  /** replace the object to make postgres able to update the user(from javascript Object to postgres query) */
+  let Array = [];
+  let Data = [];
+  let i = 1;
+  for (let key in data) {
+    const item = `${key} = '${data[key]}'`;
+    Array.push(item);
+    Data.push(data[key]);
+    i++;
+  }
+
+  const informations = Array.join(', ');
     const queryText = {
-      text: `UPDATE users SET ${updateduser} WHERE id = $1;`,
+      text: `UPDATE users SET ${informations} WHERE id = $1;`,
       values: [id],
     };
     try {

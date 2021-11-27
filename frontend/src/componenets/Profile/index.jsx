@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import Checkbox from '@mui/material/Checkbox';
+import Fab from '@mui/material/Fab';
 import TextField from '@mui/material/TextField';
 import 'react-notifications-component/dist/theme.css';
 import ReactNotification, { store } from 'react-notifications-component';
-
+import AddIcon from '@material-ui/icons/Add';
 import Button from '@mui/material/Button';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
@@ -74,13 +75,30 @@ function Profile() {
           <div className="w-full mb-8 flex items-center justify-center">
             <div className="avatar w-32 h-32 rounded-full  flex items-center justify-center relative overflow-hidden">
               <img src={user.photo} alt="" />
-              <input
-                type="file"
-                name="photo"
-                onChange={(event) => {
-                  formik.setFieldValue('photo', event.target.files[0]);
-                }}
-              />
+              <label htmlFor="photo">
+                <input
+                  style={{ display: 'none' }}
+                  id="photo"
+                  type="file"
+                  name="photo"
+                  onChange={(event) => {
+                    formik.setFieldValue('photo', event.target.files[0]);
+                  }}
+                />
+
+                <Fab
+                  color="secondary"
+                  size="small"
+                  component="span"
+                  aria-label="add"
+                  variant="extended"
+                >
+                  <AddIcon />
+                  {' '}
+                  Upload photo
+                </Fab>
+              </label>
+              ;
             </div>
           </div>
           <div className="-mx-3 md:flex mb-6">
