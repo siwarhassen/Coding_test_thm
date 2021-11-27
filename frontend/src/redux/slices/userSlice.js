@@ -32,7 +32,7 @@ export const fetchUser = () => async (dispatch) => {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`
         }
     } */
-  axios.get('http://localhost:3002/user/getuserbyId/2')
+  axios.get('http://localhost:3002/user/getuserbyId/1')
     .then((response) => {
       dispatch(findUserById(response.data));
       console.log(response.data);
